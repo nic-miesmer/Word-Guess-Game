@@ -67,8 +67,9 @@
             revealLetter(letter);
             remainingGuesses--;
        }
-       updateDisplay();
        checkGameStatus();
+       updateDisplay();
+
 
 
     
@@ -103,7 +104,7 @@
     var checkGameStatus = function() {
         //if all letters have been gussed and remaining guesses != 0
 
-        if(!displayWord.indexOf === -1 && remainingGuesses > 0){
+        if(displayWord.indexOf("_") === -1 && remainingGuesses > 0){
             gameWin();
             console.log("yay you win");
         }
@@ -117,7 +118,7 @@
     var gameWin = function() {
         // wins +1 
         //restart game gameSetup()
-        wins ++;
+        wins++;
         isGameFinished = true;
 
     }
