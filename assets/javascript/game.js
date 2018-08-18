@@ -15,12 +15,22 @@
         var remainingGuesses = 20;
         var isGameFinished = false;
 
-        chooseWord();       
+        chooseWord(); 
+        updateDisplay();      
         
         //do I remove the letter from chosen word,, and once it's empty win.
         //do I keep a separate word fill array
 
     };
+
+    var restartGame = function(){
+        chosenWord =[];
+        guessedLetters = [];
+        displayWord = [];
+        remainingGuesses = 20;
+        isGameStart = false;
+        isGameFinished = false;
+    }
 
 
     var chooseWord = function(){
@@ -67,20 +77,10 @@
             revealLetter(letter);
             remainingGuesses--;
        }
+
        checkGameStatus();
        updateDisplay();
 
-
-
-    
-        //Is the letter guessed in the word?
-        //If it is
-            //Reveal it in the word
-            //Add to gussed letters
-
-        //If it's not
-            //remainingGueses -1
-            //push letter into guessed Letters array
     };
 
     var revealLetter = function(letter){
@@ -89,10 +89,6 @@
             if(chosenWord[i] === letter){
                 displayWord.splice(i,  1, letter);
             }
-                // find where the letter goes,
-                    // add to displayWord at the correct index
-
-
         }
     };
 
@@ -109,6 +105,7 @@
             console.log("yay you win");
         }
         else if(remainingGuesses <= 0){
+            gameLoss();
             console.log("Sorry you lose");
         }
 
@@ -119,20 +116,31 @@
         // wins +1 
         //restart game gameSetup()
         wins++;
-        isGameFinished = true;
 
+        var html = "<p> You lossed so sad :(.  Press any Key to play again! </p>" ;
+        document.getElementById("game").innerHTML = html;
+
+        restartGame();
     }
 
     var gameLoss = function() {
 
-        isGameFinished = true;
         //display something
+
+        var html = "<p> Congratulations you won!  Press any Key to play again! </p>" ;
+        document.getElementById("game").innerHTML = html;
+
+        restartGame();
+        
         
     }
+
+
 
     document.onkeyup = function (event) {
         if(isGameStart = false){
             isGameStart = true;
+            gameSetup();
         }
         
         playerGuess(event.key.toLowerCase());
