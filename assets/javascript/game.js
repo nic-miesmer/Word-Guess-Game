@@ -83,9 +83,16 @@
     };
 
     var revealLetter = function(letter){
-        // find where the letter goes,
-        // reveal it,
-        //add letter to gussed letters
+
+        for(var i = 0; i<= chosenWord.length; i++){
+            if(chosenWord[i] === letter){
+                displayWord.splice(i,  1, letter);
+            }
+                // find where the letter goes,
+                    // add to displayWord at the correct index
+
+
+        }
     };
 
     var addToGuessedLetters = function(letter){
@@ -123,7 +130,9 @@
     }
 
     document.onkeyup = function (event) {
-
+        if(isGameStart = false){
+            isGameStart = true;
+        }
         
         playerGuess(event.key.toLowerCase());
     }
